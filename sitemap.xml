@@ -10,4 +10,10 @@
    <url>
       <loc>https://g43riko.github.io/schemas</loc>
    </url>
+   <url>
+      <loc>https://g43riko.github.io/foods/#/new</loc>
+   </url>
+   <url>
+      <loc>https://g43riko.github.io/foods</loc>
+   </url>
 </urlset>
