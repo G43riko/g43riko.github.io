@@ -2,33 +2,33 @@
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <url>
-      <loc>https://g43riko.github.io/GTools</loc>
+      <loc>/GTools</loc>
    </url>
    <url>
-      <loc>https://g43riko.github.io/GToolsNG</loc>
+      <loc>/GToolsNG</loc>
    </url>
    <url>
-      <loc>https://g43riko.github.io/schemas</loc>
+      <loc>/schemas</loc>
    </url>
    <url>
-      <loc>https://g43riko.github.io/foods/#/new</loc>
+      <loc>/foods/#/new</loc>
    </url>
    <url>
-      <loc>https://g43riko.github.io/foods</loc>
+      <loc>/foods</loc>
    </url>
    <url>
-      <loc>https://g43riko.github.io/homepage</loc>
+      <loc>/homepage</loc>
    </url>
    <url>
-      <loc>https://g43riko.github.io/data</loc>
+      <loc>/data</loc>
    </url>
    <url>
-      <loc>https://g43riko.github.io/homepage/#/analyzer</loc>
+      <loc>/homepage/#/analyzer</loc>
    </url>
    <url>
-      <loc>https://g43riko.github.io/homepage/#/about</loc>
+      <loc>/homepage/#/about</loc>
    </url>
    <url>
-      <loc>https://g43riko.github.io/homepage/#/foods</loc>
+      <loc>/homepage/#/foods</loc>
    </url>
 </urlset>
