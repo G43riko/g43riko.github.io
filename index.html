@@ -1,260 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Gabriel Csollei</title>
-    <meta name="description" content="Person page of Gabriel Csollei">
-    <meta content="homepage, g43riko, angular" name="keywords">
-    <meta content="Copyright 2017-2022" name="copyright">
-    <meta content="Bratislava" name="city">
-    <meta content="Slovakia" name="country">
-    <meta content="Gabriel Csollei" name="author">
-    <meta content="follow" name="robots">
-    <meta content="1 days" name="revisit-after">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="Gabriel Csollei">
+    <title>Homepage - G.C.</title>
     <style>
-                  body, html {
-        height: 90%;
-      }
+        @font-face {
+            font-family: 'NotoSans';
+            src: url('assets/NotoSans-Regular.ttf')  format('truetype')
+        }
+        body {
+            
+            margin: 0;
+            padding: 0;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            overflow: hidden;
+            position: absolute;
 
-      body {
-        display: flex;
-        background-color: #191919;
-      }
-
-      .centerHover {
-        width: 255px;
-        height: 255px;
-        background-color: transparent;
-        border-radius: 50%;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        margin-top: -128px;
-        margin-left: -128px;
-        z-index: 2;
-        cursor: pointer;
-        line-height: 255px;
-        text-align: center;
-        transition: all 500ms;
-      }
-
-      .centerHover.open {
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      .centerHover:hover span {
-        color: #DDD;
-      }
-
-      .centerHover:hover span:before {
-        background-color: #DDD;
-      }
-
-      .centerHover:hover span:after {
-        background-color: #DDD;
-      }
-
-      .centerHover span {
-        color: #FFF;
-        font-family: serif;
-        font-size: 18px;
-        position: relative;
-        transition: all 500ms;
-      }
-
-      .centerHover:before {
-        content: '';
-        display: inline-block;
-        height: 1px;
-        width: 16px;
-        margin-right: 12px;
-        margin-bottom: 4px;
-        background-color: #ffff;
-        transition: all 500ms;
-      }
-
-      .centerHover:after {
-        content: '';
-        display: inline-block;
-        height: 1px;
-        width: 16px;
-        margin-left: 12px;
-        margin-bottom: 4px;
-        background-color: #ffff;
-        transition: all 500ms;
-      }
-
-      canvas {
-        position: relative;
-        z-index: 1;
-        width: 100%;
-        height: 100%;
-        margin: auto;
-      }
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url(https://i.ibb.co/SBPwfsR/mirrors.jpg);
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+        h1 {
+            font-size: 8rem;
+            text-align: center;
+            font-family: NotoSans;
+            color: #fefefe;
+        }
+        h2 {
+            font-size: 4rem;
+            font-family: NotoSans;
+            color: #fefefe;
+        }
+        @media only screen and (max-width: 600px) {
+            h1 {
+                font-size: 5rem;
+            }
+            h2 {
+                font-size: 3rem;
+            }
+        }
+        .overlay {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.2);
+            background: radial-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.4));
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .overlay {
+            z-index: 1;
+            pointer-events: none;
+        }
+        .line {
+            border-bottom: 1px solid #fefefe;
+            min-width: 100%;
+        }
+        .icons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 0.5rem;
+        }
+        svg {
+            transition: transform 0.3s;
+            cursor: pointer;
+            width: 24px;;
+            height: 24px;;
+        }
+        svg:hover {
+            transform: scale(1.2);
+        }
+        .icons path {
+            fill: #fefefe;
+        }
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  </head>
-  <body>
-    <div class="centerHover"><span>- Coming soon -</span></div>
-    <script >
-        var h = $(document).height(),
-    w = $(document).width(),
-    cw = w,
-    ch = h,
-    maxorbit = 255, // distance from center
-    centery = ch/2,
-    centerx = cw/2;
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <h1>We're comming soon</h1>
+        <div class="line"></div>
+        <h2>Gabriel Csollei</h2>
 
-var stars = [],
-    collapse = false, // if hovered
-    expanse = false; // if clicked
-
-var canvas = $('<canvas/>').attr({width: cw, height: ch}).appendTo('body '),
-context = canvas.get(0).getContext("2d");
-
-context.globalCompositeOperation = "multiply";
-
-function setDPI(canvas, dpi) {
-    // Set up CSS size if it's not set up already
-    if (!canvas.get(0).style.width)
-        canvas.get(0).style.width = canvas.get(0).width + 'px';
-    if (!canvas.get(0).style.height)
-        canvas.get(0).style.height = canvas.get(0).height + 'px';
-
-    var scaleFactor = dpi / 96;
-    canvas.get(0).width = Math.ceil(canvas.get(0).width * scaleFactor);
-    canvas.get(0).height = Math.ceil(canvas.get(0).height * scaleFactor);
-    var ctx = canvas.get(0).getContext('2d');
-    ctx.scale(scaleFactor, scaleFactor);
-}
-
-setDPI(canvas, 192);
-
-var star = function(){
-	
-	// Get a weighted random number, so that the majority of stars will form in the center of the orbit
-	var rands = [];
-	rands.push(Math.random() * (maxorbit/2) + 1);
-	rands.push(Math.random() * (maxorbit/2) + maxorbit);
-
-	this.orbital = (rands.reduce(function(p, c) {
-		return p + c;
-	}, 0) / rands.length);
-	// Done getting that random number, it's stored in this.orbital
-
-	this.x = centerx; // All of these stars are at the center x position at all times
-	this.y = centery + this.orbital; // Set Y position starting at the center y + the position in the orbit
-	
-	this.yOrigin = centery + this.orbital;  // this is used to track the particles origin
-	
-	
-	this.speed = (Math.floor(Math.random() * 1.5) + 0.5)*Math.PI/180; // The rate at which this star will orbit
-	this.rotation = (Math.floor(Math.random() * 360) + 1)*Math.PI/180; // Starting rotation.  If not random, all stars will be generated in a single line.  
-
-	this.id = stars.length;  // This will be used when expansion takes place.
-
-	this.collapseBonus = this.orbital - (maxorbit * 0.7); // This "bonus" is used to randomly place some stars outside of the blackhole on hover
-	if(this.collapseBonus < 0){ // if the collapse "bonus" is negative
-		this.collapseBonus = 0; // set it to 0, this way no stars will go inside the blackhole
-	}
-
-	stars.push(this);
-	this.color = 'rgba(255,255,255,'+ (1 - ((this.orbital) / 255)) +')'; // Color the star white, but make it more transparent the further out it is generated
-	
-	this.hoverPos = centery + (maxorbit/2) + this.collapseBonus;  // Where the star will go on hover of the blackhole
-	this.expansePos = centery + (this.id%100)*-10; // Where the star will go when expansion takes place
-	
-}
-star.prototype.draw = function(){
-	// the stars are not actually moving on the X axis in my code.  I'm simply rotating the canvas context for each star individually so that they all get rotated with the use of less complex math in each frame.
-	
-	if(!expanse){
-		this.rotation += this.speed;
-		if(!collapse){ // not hovered
-			if(this.y > this.yOrigin){
-				this.y-= 2.5;
-			}
-			if(this.y < this.yOrigin-4){
-				this.y+= 2.5;
-			}
-		} else { // on hover
-			if(this.y > this.hoverPos){
-				this.y-= 2.5;
-			}
-			if(this.y < this.hoverPos-4){
-				this.y+= 2.5;
-			}
-		}
-	} else {
-		this.rotation += this.speed / 2;
-		if(this.y > this.expansePos){
-			this.y-= 4;
-		}
-	}
-	
-	context.save();
-		context.fillStyle = this.color;
-		context.translate(centerx, centery);
-		context.rotate(this.rotation);
-		context.translate(-centerx, -centery);
-		context.fillRect(this.x, this.y, 1, 1);
-		context.fill();
-	context.restore();
-}
-
-
-$('.centerHover').on('click',function(){
-	collapse = false;
-	expanse = true;
-	
-	$(this).addClass('open');
-});
-$('.centerHover').on('mouseover',function(){
-	if(expanse == false){
-		collapse = true;
-	}
-});
-$('.centerHover').on('mouseout',function(){
-	if(expanse == false){
-		collapse = false;
-	}
-});
-
-
-window.requestFrame = (function(){
-	return  window.requestAnimationFrame       ||
-		window.webkitRequestAnimationFrame ||
-		window.mozRequestAnimationFrame    ||
-		function( callback ){
-		window.setTimeout(callback, 1000 / 60);
-	};
-})();
-
-function loop(){
-	context.fillStyle = 'rgba(25,25,25,0.1)'; // somewhat clear the context, this way there will be trails behind the stars 
-	context.fillRect(0, 0, cw, ch);
-
-	for(var i = 0; i < stars.length; i++){  // For each star
-		if(stars[i] != stars){
-			stars[i].draw(); // Draw it
-		}
-	}
-
-	requestFrame(loop);
-}
-
-function init(time){
-	context.fillStyle = 'rgba(25,25,25,1)';  // Initial clear of the canvas, to avoid an issue where it all gets too dark
-	context.fillRect(0, 0, cw, ch);
-	for(var i = 0; i < 2500; i++){  // create 2500 stars
-		new star();
-	}
-	loop();
-}
-init();
-    </script>
-  </body>
+        <div class="icons">
+            <!-- iconmonstr.com -->
+            <a href="https://github.com/G43riko" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </div>
+    </div>
+</body>
 </html>
+
+<!--
+    <img src="https://i.ibb.co/3cwq5X0/Niku-a-Lentilky.jpg" alt="Slider image">
+
+
+    https://i.ibb.co/3cwq5X0/Niku-a-Lentilky.jpg
+    https://i.ibb.co/SBPwfsR/mirrors.jpg
+https://i.ibb.co/6WSwD3w/Gabriel-9.jpg
+
+-->
