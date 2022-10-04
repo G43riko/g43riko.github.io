@@ -2,33 +2,33 @@
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <url>
-      <loc>/GTools</loc>
+      <loc>http://gabrielcsollei.xyz/GTools</loc>
    </url>
    <url>
-      <loc>/GToolsNG</loc>
+      <loc>http://gabrielcsollei.xyz/GToolsNG</loc>
    </url>
    <url>
-      <loc>/schemas</loc>
+      <loc>http://gabrielcsollei.xyz/schemas</loc>
    </url>
    <url>
-      <loc>/foods/#/new</loc>
+      <loc>http://gabrielcsollei.xyz/foods/#/new</loc>
    </url>
    <url>
-      <loc>/foods</loc>
+      <loc>http://gabrielcsollei.xyz/foods</loc>
    </url>
    <url>
-      <loc>/homepage</loc>
+      <loc>http://gabrielcsollei.xyz/homepage</loc>
    </url>
    <url>
-      <loc>/data</loc>
+      <loc>http://gabrielcsollei.xyz/data</loc>
    </url>
    <url>
-      <loc>/homepage/#/analyzer</loc>
+      <loc>http://gabrielcsollei.xyz/homepage/#/analyzer</loc>
    </url>
    <url>
-      <loc>/homepage/#/about</loc>
+      <loc>http://gabrielcsollei.xyz/homepage/#/about</loc>
    </url>
    <url>
-      <loc>/homepage/#/foods</loc>
+      <loc>http://gabrielcsollei.xyz/homepage/#/foods</loc>
    </url>
 </urlset>
