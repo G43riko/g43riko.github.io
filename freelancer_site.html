@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en" class="antialiased">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name — Portfolio (Home · Work · Skills)</title>
+  <meta name="description" content="Freelance web developer portfolio: home, work and skills driven by embedded JSON data. Minimal, responsive and easy to extend. Dark mode + enhanced UI." />
+
+  <!-- Tailwind (CDN) quick config. For production compile Tailwind and enable purging. -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class', // we control dark mode via a 'dark' class on <html>
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              300: '#67e8f9',
+              500: '#06b6d4',
+              700: '#0891b2'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Small helpers for smoother transitions and accessible focus rings */
+    :root { --glass: rgba(255,255,255,0.6); }
+    .focus-ring:focus { outline: none; box-shadow: 0 0 0 4px rgba(6,182,212,0.12); border-radius: 8px; }
+    .card-shadow { box-shadow: 0 6px 18px rgba(2,6,23,0.06); }
+
+    /* subtle animation for modal */
+    .fade-in { animation: fadeIn .18s ease both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  </style>
+</head>
+<body class="bg-white text-slate-900 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-200">
+  <div class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-white/60 dark:bg-slate-900/60 backdrop-blur-sm border-b border-slate-100 dark:border-slate-800">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+
+        <!-- Brand -->
+        <a href="#/" class="flex items-center gap-3 no-underline text-current" aria-label="Homepage">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-brand-300 text-white flex items-center justify-center font-bold shadow-sm">YN</div>
+          <span class="hidden sm:inline-block font-semibold">Your Name</span>
+        </a>
+
+        <!-- Nav + utilities -->
+        <div class="flex items-center gap-4">
+          <nav aria-label="Primary" class="hidden sm:block">
+            <ul class="flex items-center gap-3 text-sm">
+              <li><a href="#/" data-nav class="px-3 py-2 rounded-md hover:bg-slate-50 dark:hover:bg-slate-800">Home</a></li>
+              <li><a href="#/work" data-nav class="px-3 py-2 rounded-md hover:bg-slate-50 dark:hover:bg-slate-800">Work</a></li>
+              <li><a href="#/skills" data-nav class="px-3 py-2 rounded-md hover:bg-slate-50 dark:hover:bg-slate-800">Skills</a></li>
+              <li><a href="#contact" class="px-3 py-2 rounded-md bg-brand-500 text-white hover:opacity-95">Contact</a></li>
+            </ul>
+          </nav>
+
+          <!-- Social icons (quick links) -->
+          <div class="flex items-center gap-2">
+            <a href="https://github.com/yourusername" aria-label="GitHub" class="p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800">
+              <!-- GitHub -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.648.5.5 5.648.5 12c0 5.091 3.292 9.408 7.865 10.93.575.106.783-.25.783-.557 0-.275-.01-1.006-.015-1.977-3.197.695-3.872-1.54-3.872-1.54-.523-1.328-1.277-1.682-1.277-1.682-1.044-.714.08-.699.08-.699 1.154.082 1.76 1.185 1.76 1.185 1.026 1.757 2.693 1.25 3.35.955.104-.742.402-1.25.73-1.538-2.553-.29-5.238-1.276-5.238-5.678 0-1.254.448-2.279 1.184-3.083-.119-.29-.513-1.456.112-3.035 0 0 .965-.309 3.162 1.18.917-.255 1.9-.382 2.877-.387.976.005 1.96.132 2.877.387 2.196-1.49 3.161-1.18 3.161-1.18.626 1.579.232 2.745.113 3.035.737.804 1.183 1.829 1.183 3.083 0 4.413-2.688 5.386-5.252 5.667.414.357.784 1.06.784 2.135 0 1.542-.014 2.787-.014 3.166 0 .31.206.669.79.556C20.71 21.404 24 17.091 24 12c0-6.352-5.148-11.5-12-11.5z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/yourusername" aria-label="LinkedIn" class="p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800">
+              <!-- LinkedIn -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.48 6S0 4.88 0 3.5 1.12 1 2.48 1s2.5 1.12 2.5 2.5zM0 8h4.98v16H0V8zM8.98 8h4.78v2.2h.07c.67-1.27 2.31-2.61 4.76-2.61C24.04 7.59 24 11 24 15.3V24h-4.98v-7.2c0-1.72-.03-3.93-2.4-3.93-2.4 0-2.76 1.86-2.76 3.78V24H8.98V8z"/></svg>
+            </a>
+            <a href="https://x.com/yourusername" aria-label="X (Twitter)" class="p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800">
+              <!-- X icon -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L12 12M12 12L6 18M12 12l6 6M12 12l-6-6"/></svg>
+            </a>
+          </div>
+
+          <!-- Theme toggle -->
+          <button id="theme-toggle" class="ml-2 p-2 rounded-md focus-ring" aria-label="Toggle theme">
+            <!-- We'll toggle visibility with JS -->
+            <svg id="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" class="hidden" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            <svg id="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" class="hidden" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="flex-grow">
+      <div class="max-w-6xl mx-auto px-6 py-12 lg:py-16">
+
+        <!-- Hero -->
+        <section id="page-home" class="page">
+          <div class="grid gap-12 md:grid-cols-2 md:items-center">
+            <div>
+              <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">Your Name <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 to-brand-700">— Freelance Web Developer</span></h1>
+              <p class="mt-3 text-xl sm:text-2xl text-slate-600 dark:text-slate-300 max-w-xl">I craft fast, accessible and maintainable web experiences — frontend, backend & APIs. I help teams go from idea to production with clear tradeoffs and pragmatic engineering.</p>
+
+              <div class="mt-6 text-sm text-slate-600 dark:text-slate-400 space-y-1">
+                <p>Based in <strong>Bratislava, Slovakia</strong> — Available for freelance & remote work.</p>
+                <p class="flex items-center gap-3 mt-2">
+                  <a href="mailto:hello@yourdomain.com" class="inline-flex items-center gap-2 px-3 py-2 rounded-md ring-1 ring-slate-100 dark:ring-slate-800 hover:ring-slate-200"> 
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/></svg>
+                    hello@yourdomain.com
+                  </a>
+                </p>
+              </div>
+
+              <div class="mt-8 flex flex-wrap items-center gap-4">
+                <a href="#contact" class="inline-flex items-center gap-2 bg-brand-500 text-white px-4 py-2 rounded-md font-medium shadow-sm">Contact me</a>
+                <a href="#/work" class="inline-flex items-center gap-2 px-4 py-2 rounded-md ring-1 ring-slate-100 dark:ring-slate-800">See my work</a>
+              </div>
+
+              <!-- Highlights with icons -->
+              <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="flex items-start gap-3">
+                  <div class="bg-slate-50 dark:bg-slate-800 p-2 rounded-md"> 
+                    <!-- lightning icon -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                  </div>
+                  <div>
+                    <div class="text-sm font-medium">Fast delivery</div>
+                    <div class="text-xs text-slate-500 dark:text-slate-400">Efficient prototyping & production-ready code</div>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3">
+                  <div class="bg-slate-50 dark:bg-slate-800 p-2 rounded-md"> 
+                    <!-- shield icon -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z"/></svg>
+                  </div>
+                  <div>
+                    <div class="text-sm font-medium">Secure & robust</div>
+                    <div class="text-xs text-slate-500 dark:text-slate-400">Solid architectures and testing culture</div>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3">
+                  <div class="bg-slate-50 dark:bg-slate-800 p-2 rounded-md"> 
+                    <!-- users icon -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  </div>
+                  <div>
+                    <div class="text-sm font-medium">Collaboration</div>
+                    <div class="text-xs text-slate-500 dark:text-slate-400">Clear communication, handover and docs</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Visual card -->
+            <div class="flex items-center justify-center">
+              <div class="w-full max-w-md rounded-2xl border border-slate-100 dark:border-slate-800 p-6 card-shadow bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 transition-transform hover:-translate-y-1">
+                <div class="h-44 bg-gradient-to-tr from-slate-100 to-white dark:from-slate-800 dark:to-slate-900 rounded-lg flex items-center justify-center text-slate-400">
+                  <span class="text-sm">Project screenshot or illustration</span>
+                </div>
+
+                <div class="mt-4">
+                  <h3 class="text-lg font-semibold">Featured project</h3>
+                  <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">A short highlight focusing on impact: performance, accessibility, or conversion improvements.</p>
+                  <div class="mt-4 flex items-center gap-3">
+                    <a href="#/work" class="text-sm font-medium">View projects →</a>
+                    <a href="https://github.com/yourusername" class="text-sm text-slate-500">Source</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- WORK -->
+        <section id="page-work" class="hidden page mt-6" aria-labelledby="work-title">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 id="work-title" class="text-2xl font-semibold">Selected Work</h2>
+              <p class="mt-1 text-slate-600 dark:text-slate-400">Curated projects — click tags to filter, or search by title/description.</p>
+            </div>
+
+            <div class="flex gap-3 items-center">
+              <input id="project-search" type="search" placeholder="Search projects or tags…" class="w-48 rounded-md border px-3 py-2 text-sm bg-white dark:bg-slate-800 border-slate-100 dark:border-slate-700" aria-label="Search projects">
+              <button id="clear-filters" class="px-3 py-2 text-sm rounded-md ring-1 ring-slate-100 dark:ring-slate-700">Clear</button>
+            </div>
+          </div>
+
+          <!-- Tag chips (rendered dynamically) -->
+          <div id="project-tags" class="mt-4 flex flex-wrap gap-2"></div>
+
+          <div id="projects-list" class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="page-skills" class="hidden page mt-6" aria-labelledby="skills-title">
+          <h2 id="skills-title" class="text-2xl font-semibold">Skills & Proficiency</h2>
+          <p class="mt-1 text-slate-600 dark:text-slate-400">Grouped by area — relative proficiency score to quickly communicate strengths.</p>
+
+          <div id="skills-list" class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+        </section>
+
+        <!-- contact -->
+        <section id="contact" class="mt-12 bg-slate-50 dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700 p-6 rounded-lg">
+          <div class="md:flex md:items-center md:justify-between">
+            <div>
+              <h3 class="text-lg font-semibold">Let's build something together</h3>
+              <p class="mt-1 text-slate-600 dark:text-slate-400">Available for freelance, contract or long-term partnerships. Tell me about your project and timeline.</p>
+            </div>
+            <div class="mt-4 md:mt-0 flex items-center gap-3">
+              <a href="mailto:hello@yourdomain.com?subject=Project%20Inquiry" class="inline-flex items-center gap-2 bg-brand-500 text-white px-4 py-2 rounded-md">Email me</a>
+              <a href="tel:+421900000000" class="inline-flex items-center gap-2 px-4 py-2 rounded-md ring-1 ring-slate-100 dark:ring-slate-700">Call</a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-100 dark:border-slate-800">
+      <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between text-sm text-slate-500 dark:text-slate-400">
+        <div>© <span id="year">2025</span> Your Name — Freelance Web Developer</div>
+        <div class="mt-3 sm:mt-0 flex items-center gap-3">
+          <a href="#/privacy" class="hover:underline">Privacy</a>
+          <a href="#/imprint" class="hover:underline">Imprint</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Embedded JSON data (projects + skills). For production you can move to data.json and fetch it. -->
+  <script id="data-json" type="application/json">
+  {
+    "projects": [
+      {
+        "id": "pj-1",
+        "title": "KaraKeep — Music collection manager",
+        "summary": "Web app to organize & stream personal music collections.",
+        "description": "Full-stack music manager with playlisting, metadata normalization and a modern responsive UI. I implemented search optimizations, metadata pipeline and frontend performance improvements.",
+        "tags": ["TypeScript","React","Tailwind","Node.js","Search"],
+        "repo": "https://github.com/yourusername/karakeep",
+        "live": "https://demo.karakeep.example",
+        "screenshot": "",
+        "icon": "music"
+      },
+      {
+        "id": "pj-2",
+        "title": "Survivor — Multiplayer prototype",
+        "summary": "A multiplayer survival game prototype with networking and persistence.",
+        "description": "Server in Deno and a minimal client in TypeScript. Implemented entity replication, light-weight physics and matchmaking. Focused on network performance and authoritative server design.",
+        "tags": ["TypeScript","Deno","WebSocket","GameDev"],
+        "repo": "https://github.com/yourusername/survivor",
+        "live": "",
+        "screenshot": "",
+        "icon": "game"
+      },
+      {
+        "id": "pj-3",
+        "title": "Docs Portal — Static site generator",
+        "summary": "Lightweight documentation site with searchable content and versioning.",
+        "description": "Built a static site generator and search index pipeline. Prioritised accessibility, SEO and fast load times. Implemented incremental builds and caching strategies.",
+        "tags": ["Node.js","Static","SEO","Docs"],
+        "repo": "https://github.com/yourusername/docs-portal",
+        "live": "https://docs.example.com",
+        "screenshot": "",
+        "icon": "docs"
+      }
+    ],
+    "skills": [
+      {
+        "category": "Frontend",
+        "items": [
+          { "name": "React", "level": 90, "icon": "react" },
+          { "name": "TypeScript", "level": 88, "icon": "ts" },
+          { "name": "Tailwind CSS", "level": 85, "icon": "tailwind" }
+        ]
+      },
+      {
+        "category": "Backend",
+        "items": [
+          { "name": "Node.js", "level": 82, "icon": "node" },
+          { "name": "Deno", "level": 70, "icon": "deno" },
+          { "name": "Databases", "level": 75, "icon": "db" }
+        ]
+      },
+      {
+        "category": "DevOps & Testing",
+        "items": [
+          { "name": "Docker", "level": 70, "icon": "docker" },
+          { "name": "CI/CD", "level": 68, "icon": "ci" },
+          { "name": "Testing", "level": 72, "icon": "test" }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Client-side JS: routing, rendering, theme, filters and interactions -->
+  <script>
+    // Parse embedded data
+    const DATA = JSON.parse(document.getElementById('data-json').textContent);
+
+    // ---------- THEME (dark / light) ----------
+    const THEME_KEY = 'portfolio-theme';
+    const iconSun = document.getElementById('icon-sun');
+    const iconMoon = document.getElementById('icon-moon');
+
+    function setTheme(theme) {
+      const root = document.documentElement;
+      if (theme === 'dark') {
+        root.classList.add('dark');
+        iconSun.classList.remove('hidden');
+        iconMoon.classList.add('hidden');
+      } else {
+        root.classList.remove('dark');
+        iconSun.classList.add('hidden');
+        iconMoon.classList.remove('hidden');
+      }
+      try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
+    }
+
+    function initTheme() {
+      const stored = (() => { try { return localStorage.getItem(THEME_KEY); } catch (e) { return null; } })();
+      if (stored) return setTheme(stored);
+      // respect OS preference
+      const prefers = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(prefers ? 'dark' : 'light');
+    }
+
+    // Toggle from button
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('#theme-toggle')) {
+        const isDark = document.documentElement.classList.contains('dark');
+        setTheme(isDark ? 'light' : 'dark');
+      }
+    });
+
+    // ---------- ROUTER ----------
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(el => el.classList.add('hidden'));
+      const page = document.getElementById(id);
+      if (page) page.classList.remove('hidden');
+      // update active nav link styles
+      document.querySelectorAll('[data-nav]').forEach(a => a.classList.remove('font-semibold', 'text-brand-500'));
+      const currentHash = location.hash || '#/';
+      const navMap = { '#/': 'Home', '#/work': 'Work', '#/skills': 'Skills' };
+      document.querySelectorAll('[data-nav]').forEach(a => {
+        if (a.getAttribute('href') === currentHash) {
+          a.classList.add('font-semibold', 'text-brand-500');
+        }
+      });
+    }
+
+    function router() {
+      const hash = location.hash || '#/';
+      if (hash === '#/work') {
+        showPage('page-work');
+        renderTagChips();
+        renderProjects(currentFilters.search || '');
+      } else if (hash === '#/skills') {
+        showPage('page-skills');
+        renderSkills();
+      } else {
+        showPage('page-home');
+      }
+    }
+
+    window.addEventListener('hashchange', router);
+
+    // ---------- PROJECTS (filtering, tags, search) ----------
+    let currentFilters = { tag: null, search: '' };
+
+    function collectTags() {
+      const s = new Set();
+      for (const p of DATA.projects) p.tags.forEach(t => s.add(t));
+      return Array.from(s).sort();
+    }
+
+    function renderTagChips() {
+      const container = document.getElementById('project-tags');
+      container.innerHTML = '';
+      const tags = collectTags();
+      for (const tag of tags) {
+        const btn = document.createElement('button');
+        btn.className = 'px-3 py-1 rounded-full text-sm ring-1 ring-slate-100 dark:ring-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800';
+        btn.textContent = tag;
+        btn.addEventListener('click', () => {
+          currentFilters.tag = currentFilters.tag === tag ? null : tag;
+          // reflect selection
+          document.querySelectorAll('#project-tags button').forEach(b => b.classList.remove('bg-brand-500','text-white'));
+          if (currentFilters.tag) btn.classList.add('bg-brand-500','text-white');
+          renderProjects(document.getElementById('project-search').value || '');
+        });
+        container.appendChild(btn);
+      }
+    }
+
+    function renderProjects(filter = '') {
+      const container = document.getElementById('projects-list');
+      container.innerHTML = '';
+      const q = filter.trim().toLowerCase();
+
+      const projects = DATA.projects.filter(p => {
+        const matchesTag = currentFilters.tag ? p.tags.includes(currentFilters.tag) : true;
+        if (!matchesTag) return false;
+        if (!q) return true;
+        return p.title.toLowerCase().includes(q) || p.summary.toLowerCase().includes(q) || p.tags.some(t => t.toLowerCase().includes(q));
+      });
+
+      if (projects.length === 0) {
+        container.innerHTML = '<p class="text-slate-500 dark:text-slate-400">No projects match your filters.</p>';
+        return;
+      }
+
+      for (const p of projects) {
+        const card = document.createElement('article');
+        card.className = 'p-4 border border-slate-100 dark:border-slate-800 rounded-lg hover:shadow-md transition-shadow bg-white dark:bg-slate-900';
+
+        // header row
+        const h = document.createElement('div');
+        h.className = 'flex items-start gap-3';
+
+        const iconWrap = document.createElement('div');
+        iconWrap.className = 'w-10 h-10 rounded-md bg-slate-50 dark:bg-slate-800 flex items-center justify-center';
+        iconWrap.innerHTML = projectIconSvg(p.icon);
+        h.appendChild(iconWrap);
+
+        const meta = document.createElement('div');
+        const title = document.createElement('h3');
+        title.className = 'font-medium';
+        title.textContent = p.title;
+        meta.appendChild(title);
+        const summ = document.createElement('p');
+        summ.className = 'mt-1 text-sm text-slate-600 dark:text-slate-400';
+        summ.textContent = p.summary;
+        meta.appendChild(summ);
+
+        h.appendChild(meta);
+        card.appendChild(h);
+
+        // tags
+        const tags = document.createElement('div');
+        tags.className = 'mt-3 flex flex-wrap gap-2';
+        for (const t of p.tags) {
+          const tspan = document.createElement('button');
+          tspan.className = 'px-2 py-1 rounded-full text-xs ring-1 ring-slate-100 dark:ring-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800';
+          tspan.textContent = t;
+          tspan.addEventListener('click', () => {
+            // clicking a tag sets the global tag filter
+            currentFilters.tag = t;
+            renderTagChips();
+            renderProjects(document.getElementById('project-search').value || '');
+          });
+          tags.appendChild(tspan);
+        }
+        card.appendChild(tags);
+
+        // actions
+        const actions = document.createElement('div');
+        actions.className = 'mt-4 flex items-center gap-3';
+        if (p.live) {
+          const live = document.createElement('a');
+          live.href = p.live; live.target = '_blank'; live.rel = 'noreferrer noopener';
+          live.className = 'text-sm font-medium'; live.textContent = 'Live demo';
+          actions.appendChild(live);
+        }
+        if (p.repo) {
+          const repo = document.createElement('a');
+          repo.href = p.repo; repo.target = '_blank'; repo.rel = 'noreferrer noopener';
+          repo.className = 'text-sm text-slate-500 dark:text-slate-400'; repo.innerHTML = '<svg class="inline-block mr-2" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.648.5.5 5.648.5 12c0 5.091 3.292 9.408 7.865 10.93.575.106.783-.25.783-.557 0-.275-.01-1.006-.015-1.977-3.197.695-3.872-1.54-3.872-1.54-.523-1.328-1.277-1.682-1.277-1.682-1.044-.714.08-.699.08-.699 1.154.082 1.76 1.185 1.76 1.185 1.026 1.757 2.693 1.25 3.35.955.104-.742.402-1.25.73-1.538-2.553-.29-5.238-1.276-5.238-5.678 0-1.254.448-2.279 1.184-3.083-.119-.29-.513-1.456.112-3.035 0 0 .965-.309 3.162 1.18.917-.255 1.9-.382 2.877-.387.976.005 1.96.132 2.877.387 2.196-1.49 3.161-1.18 3.161-1.18.626 1.579.232 2.745.113 3.035.737.804 1.183 1.829 1.183 3.083 0 4.413-2.688 5.386-5.252 5.667.414.357.784 1.06.784 2.135 0 1.542-.014 2.787-.014 3.166 0 .31.206.669.79.556C20.71 21.404 24 17.091 24 12c0-6.352-5.148-11.5-12-11.5z"/></svg> Source';
+          actions.appendChild(repo);
+        }
+
+        const detailsBtn = document.createElement('button');
+        detailsBtn.className = 'ml-auto text-sm text-slate-500 dark:text-slate-400';
+        detailsBtn.textContent = 'Details';
+        detailsBtn.addEventListener('click', () => showProjectDetails(p));
+        actions.appendChild(detailsBtn);
+
+        card.appendChild(actions);
+        container.appendChild(card);
+      }
+    }
+
+    function projectIconSvg(name) {
+      switch (name) {
+        case 'music': return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19V6l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>';
+        case 'game': return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M8 3v4M16 3v4"/></svg>';
+        case 'docs': return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l4 4H8l4-4z"/><path d="M4 7h16v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7z"/></svg>';
+        default: return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/></svg>';
+      }
+    }
+
+    // ---------- PROJECT DETAILS (modal) ----------
+    function showProjectDetails(project) {
+      const modal = document.createElement('div');
+      modal.setAttribute('role', 'dialog');
+      modal.className = 'fixed inset-0 z-50 flex items-center justify-center p-4';
+      modal.innerHTML = `
+        <div class="absolute inset-0 bg-black/50" tabindex="-1"></div>
+        <div class="relative max-w-2xl w-full bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 rounded-lg p-6 shadow-lg fade-in">
+          <h3 class="text-lg font-semibold">${escapeHtml(project.title)}</h3>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">${escapeHtml(project.description)}</p>
+          <div class="mt-4 flex items-center gap-3">
+            ${project.live ? `<a href="${project.live}" target="_blank" rel="noreferrer noopener" class="px-3 py-2 rounded-md bg-brand-500 text-white">Live demo</a>` : ''}
+            ${project.repo ? `<a href="${project.repo}" target="_blank" rel="noreferrer noopener" class="px-3 py-2 rounded-md ring-1 ring-slate-100 dark:ring-slate-700">Source</a>` : ''}
+            <button id="modal-close" class="ml-auto px-3 py-2 rounded-md ring-1 ring-slate-100 dark:ring-slate-700">Close</button>
+          </div>
+        </div>
+      `;
+
+      // close handlers
+      modal.querySelector('#modal-close').addEventListener('click', () => modal.remove());
+      modal.querySelector('.absolute').addEventListener('click', () => modal.remove());
+
+      // append and trap focus to close button for simple accessibility
+      document.body.appendChild(modal);
+      const closeBtn = modal.querySelector('#modal-close');
+      closeBtn.focus();
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+    }
+
+    // ---------- SKILLS ----------
+    function renderSkills() {
+      const container = document.getElementById('skills-list');
+      container.innerHTML = '';
+      for (const cat of DATA.skills) {
+        const card = document.createElement('div');
+        card.className = 'p-4 border border-slate-100 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-900';
+
+        const title = document.createElement('h4');
+        title.className = 'font-medium';
+        title.textContent = cat.category;
+        card.appendChild(title);
+
+        const list = document.createElement('div');
+        list.className = 'mt-3 space-y-3';
+
+        for (const skill of cat.items) {
+          const row = document.createElement('div');
+
+          const label = document.createElement('div');
+          label.className = 'flex items-center justify-between text-sm';
+          const left = document.createElement('div');
+          left.className = 'flex items-center gap-2';
+          left.innerHTML = skillIconInline(skill.icon) + `<span>${skill.name}</span>`;
+          const pct = document.createElement('span');
+          pct.className = 'text-xs text-slate-500 dark:text-slate-400';
+          pct.textContent = `${skill.level}%`;
+          label.appendChild(left);
+          label.appendChild(pct);
+
+          const barWrap = document.createElement('div');
+          barWrap.className = 'mt-1 h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden';
+          const bar = document.createElement('div');
+          bar.className = 'h-2 rounded-full';
+          bar.style.width = '0%'; // animate to value
+          bar.setAttribute('aria-hidden', 'true');
+          bar.style.background = 'linear-gradient(90deg, var(--from, #06b6d4), var(--to, #0891b2))';
+
+          barWrap.appendChild(bar);
+          row.appendChild(label);
+          row.appendChild(barWrap);
+          list.appendChild(row);
+
+          // animate bar
+          requestAnimationFrame(() => {
+            setTimeout(() => { bar.style.width = skill.level + '%'; }, 80);
+          });
+        }
+
+        card.appendChild(list);
+        container.appendChild(card);
+      }
+    }
+
+    function skillIconInline(name) {
+      const base = '<span class="w-5 h-5 inline-flex items-center justify-center">';
+      switch (name) {
+        case 'react': return base + '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2s4.5 1.5 6.5 4.5S20.5 14 16 17 12 22 12 22"/></svg></span>';
+        case 'ts': return base + '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2 2h20v20H2z"/></svg></span>';
+        case 'tailwind': return base + '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 12c6-6 12 0 18 0"/></svg></span>';
+        case 'node': return base + '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2v20M2 12h20"/></svg></span>';
+        default: return base + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/></svg></span>';
+      }
+    }
+
+    // ---------- UI: search & clear ----------
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('year').textContent = new Date().getFullYear();
+      initTheme();
+      router();
+
+      const search = document.getElementById('project-search');
+      if (search) {
+        search.addEventListener('input', (e) => {
+          currentFilters.search = e.target.value;
+          renderProjects(e.target.value);
+        });
+      }
+
+      const clearBtn = document.getElementById('clear-filters');
+      if (clearBtn) clearBtn.addEventListener('click', () => {
+        currentFilters = { tag: null, search: '' };
+        document.getElementById('project-search').value = '';
+        renderTagChips();
+        renderProjects('');
+      });
+
+      // make nav links keyboard-friendly (Enter/Space)
+      document.querySelectorAll('[data-nav]').forEach(a => {
+        a.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') a.click(); });
+      });
+    });
+
+    // Expose render functions for dev console if needed
+    window._portfolio = { renderProjects, renderSkills, renderTagChips, DATA };
+  </script>
+
+</body>
+</html>
