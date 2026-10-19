@@ -1,0 +1,3 @@
+Contact: mailto:gcollei@hotmail.com
+Preferred-Languages: sk, en
+Canonical: https://gcsollei.com/.well-known/security.txt
